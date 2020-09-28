@@ -81,7 +81,7 @@ module.exports = function (/* ctx */) {
       open: true, // opens browser window automatically
       proxy: {
         '/api': {
-          target: 'http://testes.prsonline.com.br/api/get-products',
+          target: 'http://testes.prsonline.com.br',
           pathRewrite: { '^/api': 'api' }
         }
       }

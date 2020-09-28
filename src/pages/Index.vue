@@ -9,18 +9,29 @@
       dense
       :data="serverdata"
       :columns="columns"
-      row-key="name"
+      row-key="names"
+       :separator="separator"
+       :options="[
+       // { label: 'Horizontal', value: 'horizontal' },
+       // { label: 'Vertical', value: 'vertical' },
+       // { label: 'Cell', value: 'cell' },
+      //{ label: 'None', value: 'none' },
+      ]"
     >
-    <template v-slot:body="props">
-        <q-tr v-for="(usuario, id_produto) in usuarios" :key="id_produto " :props="props">
-            <q-td :key="name" :props="props">
-               {{ props.row.name }}
-             </q-td>
-            <q-td :key="valor" :props="props">
-               {{ props.row.valor }}
-             </q-td>
-        </q-tr>
-      </template>
+    <template v-slot:body-cell-nome="props">
+        <q-td :props="props">
+        <div>
+            {{ serverdata.nome }}
+        </div>
+        </q-td>
+        </template>
+        <template v-slot:body-cell-valor="props">
+        <q-td  :props="props">
+        <div >
+             <span v-once>'R$: {{serverdata.valor }}'</span>
+        </div>
+        </q-td>
+        </template>
       </q-table>
   </div>
 </template>
@@ -32,39 +43,33 @@ export default {
   name: 'App',
   data () {
     return {
-      usuarios: [],
-      usuario: {
-        name: '',
-        valor: '',
-        sub: false
-      },
+      separator: 'cell',
       columns: [
         {
-          name: 'name',
+          name: 'nom',
           required: true,
           label: 'Nome',
-          align: 'center',
-          field: row => row.name,
+          align: 'left',
+          field: row => row.nome,
           format: val => `${val}`,
           sortable: true
         },
-        { name: 'valor', align: 'center', label: 'Valor', field: row => row.valor, sortable: true }
+        { name: 'val', align: 'center', label: 'Valor', field: row => row.valor, sortable: true }
       ],
-      serverdata: [
-        {
-          name: 'Lucas Felipe',
-          valor: 2
-        }
-      ]
+      serverdata: []
     }
   },
   methods: {
     obterInfo () {
       this.$axios.get('/get-products')
         .then((response) => {
-          this.usuarios = response.data
+          this.serverdata = response.data
+          console.log(this.serverdata)
         })
     }
+  },
+  mounted () {
+    this.obterInfo()
   }
 }
 </script>
