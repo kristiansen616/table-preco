@@ -27,36 +27,78 @@
         </template>
         <template v-slot:body-cell-valor="props">
         <q-td  :props="props">
-        <div >
-             <span v-once>'R$: {{serverdata.valor }}'</span>
+        <div>
+             {{'R$' + serverdata.valor }}
         </div>
         </q-td>
         </template>
       </q-table>
+        <listlink
+          v-for="link in listlink"
+          :key="link.title"
+          v-bind="link"
+        />
+        <img v-bind:src="img" width="1400px" height="500px" q-mr-4>
   </div>
 </template>
 
   </div>
 </template>
+<style>
+.flow{
+  margin-right: 30px;
+}
+</style>
 <script>
+import listlink from 'components/linkstest.vue'
+const linksData = [
+  {
+    title: 'Vue',
+    icon: 'book',
+    link: 'https://vuejs.org'
+  },
+  {
+    title: 'Github',
+    icon: 'supervised_user_circle',
+    link: 'https://github.com/kristiansen616/painel-admin'
+  },
+  {
+    title: 'Netlify',
+    icon: 'explore',
+    link: 'https://www.netlify.com'
+  },
+  {
+    title: 'Quasar',
+    icon: 'record_voice_over',
+    link: 'https://quasar.dev'
+  }
+]
 export default {
   name: 'App',
+  components: { listlink },
   data () {
     return {
+      listlink: linksData,
+      img: 'https://raw.githubusercontent.com/lcr-uerj/LabMetro/master/images/universe-5033471_1920.jpg?token=AMSXUNVOK65YPWFR44BB3YS7OO2PW',
+      sif: 'R$',
       separator: 'cell',
       columns: [
         {
-          name: 'nom',
+          name: 'noma',
           required: true,
           label: 'Nome',
           align: 'left',
-          field: row => row.nome,
+          field: 'nome',
           format: val => `${val}`,
           sortable: true
         },
-        { name: 'val', align: 'center', label: 'Valor', field: row => row.valor, sortable: true }
+        { name: 'val', align: 'center', label: 'Valor', field: 'valor', sortable: true }
       ],
-      serverdata: []
+      serverdata: [
+        {
+          sif: 'R$'
+        }
+      ]
     }
   },
   methods: {
