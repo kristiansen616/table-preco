@@ -50,10 +50,64 @@
 import EssentialLink from 'components/EssentialLink.vue'
 const linksData = [
   {
+    title: 'Clientes',
+    caption: '',
+    icon: 'people_alt',
+    link: '/clientes'
+  },
+  {
     title: 'Produtos',
     caption: '',
-    icon: 'home',
+    icon: 'all_inbox',
+    link: '/produtos'
+  },
+  {
+    title: 'FAQ',
+    caption: '',
+    icon: 'help',
+    link: '/faq'
+  },
+  {
+    title: 'Funcionáros/Usuários',
+    caption: '',
+    icon: 'groups',
+    link: '/funci_user'
+  },
+  {
+    title: 'Tracking',
+    caption: '',
+    icon: 'vpn_key',
+    link: '/tracking'
+  },
+  {
+    title: 'Municípios',
+    caption: '',
+    icon: 'public',
     link: '/'
+  },
+  {
+    title: 'Edição de textos',
+    caption: '',
+    icon: 'help',
+    link: '/edit_texto'
+  },
+  {
+    title: 'Avisos',
+    caption: '',
+    icon: 'warning',
+    link: '/avisos'
+  },
+  {
+    title: 'Veículos',
+    caption: '',
+    icon: 'drive_eta',
+    link: '/veiculos'
+  },
+  {
+    title: 'Feriados',
+    caption: '',
+    icon: 'local_cafe',
+    link: '/feriados'
   }
 ]
 export default {
